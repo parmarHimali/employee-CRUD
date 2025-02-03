@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+table {
+    /* width: 80% !important; */
+    margin: auto;
+}
+
+button svg {
+    font-size: 1.3rem;
+}
+
+table thead th {
+    background-color: #18122B !important;
+    color: #FEF9E1 !important;
+}
+
+.btn-primary,
+.btn-success {
+    background-color: #393053 !important;
+    border: 1px solid #393053 !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    background-color: #635985 !important;
+}
+
+.btn-danger {
+    background-color: darkred !important;
+}
+
+.btn-warning {
+    background-color: #f1b53c !important;
+}
+
+.btn-warning:hover {
+    background-color: #face3e !important;
+}
