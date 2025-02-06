@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 export const EmployeeContext = React.createContext([]);
 function App() {
-  const storedEmp = JSON.parse(localStorage.getItem("employees"));
+  const storedEmp = JSON.parse(localStorage.getItem("employees")) || [];
   const [employees, setEmployees] = useState(
     storedEmp.length > 0 ? storedEmp : []
   );
