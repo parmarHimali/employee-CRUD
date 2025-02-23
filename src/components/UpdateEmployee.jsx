@@ -35,7 +35,7 @@ const UpdateEmployee = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEmployee({ ...employee, [name]: value });
+    setEmployee({ ...employee, [name]: value.trimStart() });
   };
 
   const handleUpdate = () => {
@@ -52,12 +52,17 @@ const UpdateEmployee = () => {
       err.phone = "Mobile number already exists! ";
     }
 
-    if (employee.name === "") {
+    if (employee.name.trim() === "") {
       err.name = "Please provide your name";
     } else if (!/^[A-Za-z ]+$/.test(employee.name)) {
       err.name = "Name must contain only alphabets";
+    } else if (employee.name.length < 2) {
+      err.name = "Name must contain atleast 2 character";
+    } else if (employee.name.length > 50) {
+      err.name = "Name cannot exceed 50 characters";
     }
-    if (employee.email === "") {
+
+    if (employee.email.trim() === "") {
       err.email = "Please provide you email";
     } else if (!/^[a-z0-9-._]+@[a-z0-9-_.]+\.[a-z]{2,}$/.test(employee.email)) {
       err.email = "Please provide valid email format";
@@ -87,7 +92,13 @@ const UpdateEmployee = () => {
     setError({ ...err });
     if (Object.keys(err).length === 0) {
       const updatedEmployees = employees.map((emp) => {
-        return emp.id == id ? employee : emp;
+        return emp.id == id
+          ? {
+              ...employee,
+              name: employee.name.trim(),
+              email: employee.email.trim(),
+            }
+          : emp;
       });
       setEmployees(updatedEmployees);
       toast.success("Employee Updated Successfully!");
@@ -97,7 +108,7 @@ const UpdateEmployee = () => {
 
   return (
     <>
-      <Modal show centered>
+      <Modal show>
         <Modal.Header>
           <Modal.Title>Update Employee</Modal.Title>
         </Modal.Header>

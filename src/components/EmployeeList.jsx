@@ -27,16 +27,18 @@ const EmployeeList = () => {
   };
   return (
     <Container>
-      <h1 className="text-center fs-2 m-2 mt-4">Employee List</h1>
-      <div className=" d-flex justify-content-center w-100 my-3">
-        <Button
-          variant="primary"
-          className="mb-3 d-flex align-items-center"
-          onClick={() => setShowAdd(true)}
-        >
-          <span className="me-2">Add Employee</span>
-          <IoPersonAdd />
-        </Button>
+      <div className="d-flex flex-column flex-md-row justify-content-between w-100 align-items-center my-3">
+        <h2 className="">Employee List</h2>
+        <div className="">
+          <Button
+            variant="primary"
+            className=" d-flex align-items-center"
+            onClick={() => setShowAdd(true)}
+          >
+            <span className="me-2">Add Employee</span>
+            <IoPersonAdd />
+          </Button>
+        </div>
       </div>
       <AddEmployee
         showAdd={showAdd}

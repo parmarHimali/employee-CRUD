@@ -38,12 +38,16 @@ const AddEmployee = ({ showAdd, setShowAdd, setEmployees, employees }) => {
     if (employees.some((employee) => employee.phone == phone)) {
       err.phone = "Mobile number already exists! ";
     }
-    if (name === "") {
+    if (name.trim() === "") {
       err.name = "Please provide your name";
     } else if (!/^[A-Za-z ]+$/.test(name)) {
       err.name = "Name must contain only alphabets";
+    } else if (name.length < 2) {
+      err.name = "Name must contain atleast 2 character";
+    } else if (name.length > 50) {
+      err.name = "Name cannot exceed 50 characters";
     }
-    if (email === "") {
+    if (email.trim() === "") {
       err.email = "Please provide you email";
     } else if (!/^[a-z0-9-._]+@[a-z0-9-_.]+\.[a-z]{2,}$/.test(email)) {
       err.email = "Please provide valid email format";
@@ -78,9 +82,9 @@ const AddEmployee = ({ showAdd, setShowAdd, setEmployees, employees }) => {
       setEmployees([
         ...employees,
         {
-          id: `EMP_${name[0]}${name[1]}${Math.floor(Math.random() * 1000)}`,
-          name,
-          email,
+          id: `EMP_${name[0]}${name[1]}${new Date().getTime()}`,
+          name: name.trim(),
+          email: email.trim(),
           designation,
           experience,
           gender,
@@ -117,7 +121,7 @@ const AddEmployee = ({ showAdd, setShowAdd, setEmployees, employees }) => {
                 placeholder="enter employee name"
                 autoFocus
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setName(e.target.value.trimStart())}
               />
               {error.name && (
                 <Form.Text style={{ color: "red" }}>* {error.name}</Form.Text>
@@ -130,7 +134,7 @@ const AddEmployee = ({ showAdd, setShowAdd, setEmployees, employees }) => {
                 id="email"
                 placeholder="enter employee email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.trimStart())}
               />
               {error.email && (
                 <Form.Text style={{ color: "red", display: "block" }}>
